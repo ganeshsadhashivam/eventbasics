@@ -46,24 +46,48 @@ const books = [
 ];
 
 //simple list
+const getBook = (id) => {
+  const book = books.find((book) => book.id === id);
+};
 function App() {
+  const someValue = "shakeBake";
+  const displayValue = () => {
+    console.log(someValue);
+  };
+
   return (
     <div className="App">
       <section className="book">
-        <EventExamples />
+        {/* <EventExamples /> */}
         {books.map((data) => {
-          return (
-            <div key={data.id}>
-              <img src={data.img} alt={data.title} />
-              <h2>{data.title}</h2>
-              <h2>{data.author}</h2>
-            </div>
-          );
+          return <Book {...data} key={data.id} displayValue={displayValue} />;
         })}
+        {/* <SomeComponent someValue={someValue} /> */}
       </section>
     </div>
   );
 }
+
+const Book = (props) => {
+  const { img, title, author, id } = props;
+  const getSingleBook = () => {
+    getBook(id);
+  };
+
+  const displayTitle = (props) => {
+    console.log(title);
+  };
+  return (
+    <div>
+      <img src={img} alt={title} />
+      <h2>{title}</h2>
+      <h2>{author}</h2>
+      {/* <button onClick={displayTitle}>display title</button> */}
+      <button onClick={getSingleBook}>display title</button>
+    </div>
+  );
+};
+
 // const handleFormInput = (e) => {
 //   console.log(e);
 //   console.log(e.target.name);
@@ -81,27 +105,27 @@ function App() {
 //   console.log("form submitted");
 // };
 
-const EventExamples = () => {
-  return (
-    <section>
-      {/* onSubmit={handleFormSubmission} */}
-      <form>
-        <h2>Typical form</h2>
-        <input
-          type="text"
-          name="example"
-          onChange={(e) => console.loh(e.target.value)}
-          style={{ margin: "1rem 0" }}
-        />
-        <button type="submit">submit</button>
-        <div>
-          <button onClick={() => console.log("click me")} type="button">
-            click me
-          </button>
-        </div>
-      </form>
-    </section>
-  );
-};
+// const EventExamples = () => {
+//   return (
+//     <section>
+//       {/* onSubmit={handleFormSubmission} */}
+//       <form>
+//         <h2>Typical form</h2>
+//         <input
+//           type="text"
+//           name="example"
+//           onChange={(e) => console.loh(e.target.value)}
+//           style={{ margin: "1rem 0" }}
+//         />
+//         <button type="submit">submit</button>
+//         <div>
+//           <button onClick={() => console.log("click me")} type="button">
+//             click me
+//           </button>
+//         </div>
+//       </form>
+//     </section>
+//   );
+// };
 
 export default App;
